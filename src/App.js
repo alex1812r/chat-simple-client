@@ -69,7 +69,7 @@ function App() {
 
   useEffect(() => {
     if(author) {
-      fetch('http://localhost:5000/messages')
+      fetch(process.env.REACT_APP_SERVER_URL + '/messages')
         .then((res) => res.json())
         .then((data) => {
           setMessages(data.messages);
@@ -96,7 +96,7 @@ function App() {
       <main className="position-absolute bottom-0 w-100 h-100">
         <Container className="d-flex flex-column h-100" style={{ maxWidth: 800 }}>
           <div className="flex-grow-1" style={{ height: 0 }}>
-            <div className="h-100 overflow-auto">
+            <div className="h-100 overflow-auto d-flex flex-column justify-content-end">
               {content}
             </div>
           </div>
