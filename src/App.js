@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import io from "socket.io-client";
-import './app.css'
+import './App.css'
 import logo from './logo.svg';
 
 const socket = io.connect(process.env.REACT_APP_SERVER_URL);
