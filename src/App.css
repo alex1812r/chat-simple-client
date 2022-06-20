@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #292929;
+  height: 100vh;
 }
 
 .App-logo {
@@ -14,19 +16,16 @@
 }
 
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
+/* .App-link {
   color: #61dafb;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +34,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.message {
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  background: #FFF;
+  border-radius: 1.125rem;
+  min-height: 2.25rem;
+  width: fit-content;
+  max-width: 66%;
+  position: relative;
+}
+
+.message.my-message {
+  background-color: #61dafb;
+  margin-left: auto;
+  border-bottom-right-radius: 0;
 }
