@@ -4,7 +4,7 @@ import io from "socket.io-client";
 import './app.css'
 import logo from './logo.svg';
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect(process.env.REACT_APP_SERVER_URL);
 
 const AuthorForm = ({ onSubmit }) => {
   const inputEl = useRef(null);
@@ -93,9 +93,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-      <main className="position-absolute bottom-0 w-100">
+      <main className="position-absolute bottom-0 w-100 h-100">
         <Container className="d-flex flex-column h-100" style={{ maxWidth: 800 }}>
-          <div className="flex-grow-1">
+          <div className="flex-grow-1" style={{ height: 0 }}>
             <div className="h-100 overflow-auto">
               {content}
             </div>
