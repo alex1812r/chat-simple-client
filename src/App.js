@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import io from "socket.io-client";
+import moment from 'moment';
 import './App.css'
 import logo from './logo.svg';
 
@@ -11,7 +12,7 @@ const AuthorForm = ({ onSubmit }) => {
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    onSubmit(inputEl.current.value);
+    onSubmit(inputEl.current.value.trim().toLowerCase());
   }, [onSubmit]);
 
   return (
@@ -52,7 +53,15 @@ function App() {
       })
       .map((msg) => (
       <div key={msg._id} className={`message ${author === msg.author ? 'my-message': ''}`}>
-        {msg.content}
+        <span className="message-author">
+          {msg.author}
+        </span>
+        <div className="message-content">
+          {msg.content}
+        </div>
+        <span className="message-date">
+          {moment(msg.createdAt).fromNow()}
+        </span>
       </div>
     ))
   }, [messages, author]);
@@ -94,16 +103,20 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
       <main className="position-absolute bottom-0 w-100 h-100">
-        <Container className="d-flex flex-column h-100" style={{ maxWidth: 800 }}>
-          <div className="flex-grow-1" style={{ height: 0 }}>
+        <div className="d-flex flex-column justify-content-end h-100 m-auto" style={{ maxWidth: 800 }}>
+          <div className="overflow-auto">
+            {content}
+          </div>
+          <div style={{ marginBottom: 50 }}></div>
+          {/* <div className="flex-grow-1" style={{ height: 0 }}>
             <div className="h-100 overflow-auto d-flex flex-column justify-content-end">
               {content}
             </div>
-          </div>
-          <div>
+          </div> */}
+          <div className="position-fixed bottom-0" style={{ width: 800 }}>
             <Form onSubmit={handleOnSubmit}>
               <div className="d-flex flex-nowrap">
-                <Form.Control
+                <Form.Control 
                   ref={inputEl}
                   type="text" 
                   placeholder="type your message" 
@@ -114,7 +127,7 @@ function App() {
               </div>
             </Form>
           </div>
-        </Container >
+        </div>
         
       </main>
     </div>
